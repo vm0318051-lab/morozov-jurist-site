@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -137,36 +138,98 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
   }
 
   function ConsultationBlock() {
-    return (
-      <section className="consultation">
-        <div className="consultationLeft">
-          <span>Бесплатная консультация</span>
-          <h2>Узнайте, можно ли списать ваши долги законно</h2>
-          <p>
-            Оставьте заявку и получите предварительную консультацию от Дмитрия
-            Морозова. Разберём вашу ситуацию и предложим варианты решения.
-          </p>
+  const [name, setName] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [message, setMessage] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
-          <div className="consultationBenefits">
-            <div>✓ Бесплатный анализ ситуации</div>
-            <div>✓ Защита от коллекторов</div>
-            <div>✓ Работа по 127-ФЗ</div>
-            <div>✓ Полное сопровождение</div>
-          </div>
+  const sendLead = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          message,
+          page: window.location.pathname,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.ok) {
+        alert("Заявка успешно отправлена!");
+        setName("");
+        setPhone("");
+        setMessage("");
+      } else {
+        alert("Ошибка отправки заявки");
+      }
+    } catch (error) {
+      alert("Ошибка соединения");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section className="consultation">
+      <div className="consultationLeft">
+        <span>Бесплатная консультация</span>
+
+        <h2>Узнайте, можно ли списать ваши долги законно</h2>
+
+        <p>
+          Оставьте заявку и получите предварительную консультацию от Дмитрия
+          Морозова. Разберём вашу ситуацию и предложим варианты решения.
+        </p>
+
+        <div className="consultationBenefits">
+          <div>✓ Бесплатный анализ ситуации</div>
+          <div>✓ Защита от коллекторов</div>
+          <div>✓ Работа по 127-ФЗ</div>
+          <div>✓ Полное сопровождение</div>
         </div>
+      </div>
 
-        <div className="consultationForm">
-          <input type="text" placeholder="Ваше имя" />
-          <input type="tel" placeholder="Ваш телефон" />
-          <textarea placeholder="Опишите ситуацию" rows="5" />
+      <div className="consultationForm">
+        <input
+          type="text"
+          placeholder="Ваше имя"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-          <a href={telegramLink} target="_blank" rel="noreferrer" className="consultationBtn">
-            Отправить заявку
-          </a>
-        </div>
-      </section>
-    );
-  }
+        <input
+          type="tel"
+          placeholder="Ваш телефон"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+
+        <textarea
+          placeholder="Опишите ситуацию"
+          rows="5"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+
+        <button
+          onClick={sendLead}
+          className="consultationBtn"
+          disabled={loading}
+        >
+          {loading ? "Отправка..." : "Отправить заявку"}
+        </button>
+      </div>
+    </section>
+  );
+}
 
   function HomePage() {
     return (
