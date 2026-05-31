@@ -230,7 +230,45 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
     </section>
   );
 }
+function OfficeBlock() {
+  return (
+    <section className="officeSection">
+      <div className="officeText">
+        <span>Мы рядом с вами</span>
+        <h2>Наш офис в Волгограде</h2>
+        <p>
+          Принимаем клиентов в офисе юридического центра Дмитрия Морозова.
+          Здесь можно получить консультацию, обсудить документы и выбрать
+          безопасный путь решения долговой ситуации.
+        </p>
 
+        <div className="officeInfo">
+          <div>📍 Волгоград, 2-я Динамовская, 10</div>
+          <div>🕘 Пн–Пт: 09:00–18:00</div>
+        </div>
+
+        <div className="officeActions">
+          <a
+            href="https://2gis.ru/volgograd/geo/4644972770889582"
+            target="_blank"
+            rel="noreferrer"
+            className="officeBtn"
+          >
+            Построить маршрут в 2ГИС
+          </a>
+
+          <a href={phoneHref} className="officeGhostBtn">
+            Позвонить
+          </a>
+        </div>
+      </div>
+
+      <div className="officePhoto">
+        <img src="/office.jpg" alt="Офис юридического центра Дмитрия Морозова" />
+      </div>
+    </section>
+  );
+}
   function HomePage() {
     return (
       <main>
@@ -353,7 +391,8 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
           </div>
         </section>
 
-        <ConsultationBlock />
+       <OfficeBlock />
+<ConsultationBlock />
       </main>
     );
   }

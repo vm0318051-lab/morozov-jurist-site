@@ -469,7 +469,157 @@ a {
   grid-template-columns: 1fr 500px;
   gap: 50px;
 }
+.officeSection {
+  max-width: 1240px;
+  margin: 0 auto 70px;
+  padding: 26px;
+  border-radius: 38px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(217, 183, 111, 0.14), transparent 28%),
+    linear-gradient(135deg, rgba(16, 27, 45, 0.96), rgba(8, 17, 31, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  display: grid;
+  grid-template-columns: 1fr 570px;
+  gap: 26px;
+  align-items: stretch;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+}
 
+.officeText {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.officeText span {
+  color: #f0d28a;
+  font-weight: 800;
+}
+
+.officeText h2 {
+  margin: 16px 0;
+  font-size: 52px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.officeText p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.officeInfo {
+  margin-top: 26px;
+  display: grid;
+  gap: 12px;
+}
+
+.officeInfo div {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.officeActions {
+  margin-top: 30px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.officeBtn,
+.officeGhostBtn {
+  padding: 17px 22px;
+  border-radius: 16px;
+  font-weight: 900;
+  transition: 0.25s;
+}
+
+.officeBtn {
+  background: linear-gradient(135deg, #f0d28a, #c49748);
+  color: #07101f;
+}
+
+.officeGhostBtn {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: white;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.officeBtn:hover,
+.officeGhostBtn:hover {
+  transform: translateY(-3px);
+}
+
+.officePhoto {
+  position: relative;
+  min-height: 430px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.officePhoto::after {
+  content: "📍 2ГИС";
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(7, 13, 24, 0.78);
+  backdrop-filter: blur(14px);
+  color: #f0d28a;
+  font-weight: 900;
+}
+
+.officePhoto img {
+  width: 100%;
+  height: 100%;
+  min-height: 430px;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .officeSection {
+    margin: 0 14px 60px;
+    padding: 18px;
+    grid-template-columns: 1fr;
+  }
+
+  .officePhoto {
+    order: -1;
+    min-height: 280px;
+  }
+
+  .officePhoto img {
+    min-height: 280px;
+  }
+
+  .officeText {
+    padding: 10px 4px 4px;
+  }
+
+  .officeText h2 {
+    font-size: 34px;
+  }
+
+  .officeText p {
+    font-size: 15px;
+  }
+
+  .officeActions {
+    flex-direction: column;
+  }
+
+  .officeBtn,
+  .officeGhostBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
 .consultationLeft span {
   color: #f0d28a;
   font-weight: 700;
