@@ -7,22 +7,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, phone, message, page } = req.body;
+    const { name, phone, message } = req.body;
 
     const token = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
     const text = `
-🔔 Новая заявка с сайта Морозов
+🔔 Новая заявка с сайта
 
 👤 Имя: ${name || "Не указано"}
 📞 Телефон: ${phone || "Не указан"}
 📝 Сообщение: ${message || "Не указано"}
-
-🌐 Страница: ${page || "Не указана"}
 `;
 
-    const response = await fetch(
+    const telegramResponse = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,
       {
         method: "POST",
@@ -36,12 +34,12 @@ export default async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
+    const telegramData = await telegramResponse.json();
 
-    if (!data.ok) {
+    if (!telegramData.ok) {
       return res.status(500).json({
         ok: false,
-        telegram: data,
+        telegram: telegramData,
       });
     }
 
