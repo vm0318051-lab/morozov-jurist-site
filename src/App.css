@@ -1048,4 +1048,68 @@ a {
   body {
     padding-bottom: 90px;
   }
+}.numbersSection {
+  max-width: 1240px;
+  margin: 0 auto 70px;
+  padding: 0 24px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.numbersSection div {
+  padding: 32px 24px;
+  border-radius: 26px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.04)
+    );
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  text-align: center;
+
+  transition: .3s;
+}
+
+.numbersSection div:hover {
+  transform: translateY(-6px);
+  border-color: rgba(240,210,138,.3);
+}
+
+.numbersSection strong {
+  display: block;
+  font-size: 42px;
+  color: #f0d28a;
+  font-weight: 900;
+}
+
+.numbersSection span {
+  display: block;
+  margin-top: 10px;
+
+  color: rgba(255,255,255,.72);
+
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .numbersSection {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 16px;
+  }
+
+  .numbersSection strong {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 600px) {
+  .numbersSection {
+    grid-template-columns: 1fr;
+  }
 }

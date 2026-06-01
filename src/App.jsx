@@ -326,7 +326,27 @@ function OfficeBlock() {
             </div>
           </div>
         </section>
+<section className="numbersSection">
+  <div>
+    <strong>10+ лет</strong>
+    <span>юридической практики</span>
+  </div>
 
+  <div>
+    <strong>500+ дел</strong>
+    <span>по долговым вопросам</span>
+  </div>
+
+  <div>
+    <strong>100 млн ₽</strong>
+    <span>списанных долгов</span>
+  </div>
+
+  <div>
+    <strong>98%</strong>
+    <span>клиентов приходят по рекомендации</span>
+  </div>
+</section>
         <section className="steps">
           <div className="sectionHead">
             <span>Как проходит работа</span>
