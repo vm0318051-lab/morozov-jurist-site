@@ -3,11 +3,12 @@ import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 function App() {
- const telegramChannelLink = "https://t.me/center_spisania";
-const telegramLink = "https://t.me/morozov_dmitry_urist";
+  const telegramChannelLink = "https://t.me/center_spisania";
+  const telegramLink = "https://t.me/morozov_dmitry_urist";
   const vkLink = "https://vk.com/uc_morozov";
   const phoneHref = "tel:+79370830303";
   const phoneText = "+7 (937) 083-03-03";
+  const twoGisLink = "https://2gis.ru/volgograd/geo/4644972770889582";
 
   const steps = [
     {
@@ -77,7 +78,7 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
 
           <div className="topLinks">
             <a
-             href={telegramChannelLink}
+              href={telegramChannelLink}
               target="_blank"
               rel="noreferrer"
               className="topTelegram"
@@ -86,19 +87,16 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
               Telegram
             </a>
 
-           <a
-  href="https://max.ru/id341811585300_biz"
-  target="_blank"
-  rel="noreferrer"
-  className="topMax"
->
-  <img
-    src="/max.png"
-    alt="MAX"
-    className="topMaxIcon"
-  />
-  MAX
-</a>
+            <a
+              href="https://max.ru/id341811585300_biz"
+              target="_blank"
+              rel="noreferrer"
+              className="topMax"
+            >
+              <img src="/max.png" alt="MAX" className="topMaxIcon" />
+              MAX
+            </a>
+
             <a href={vkLink} target="_blank" rel="noreferrer" className="topVk">
               <img src="/vk.png" alt="VK" className="topVkIcon" />
               VK
@@ -126,7 +124,7 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
             <Link to="/kollektory">Коллекторы</Link>
             <Link to="/consultation">Консультация</Link>
             <Link to="/cases">Кейсы</Link>
-           <Link to="/faq">Частые вопросы</Link>
+            <Link to="/faq">Частые вопросы</Link>
             <Link to="/contacts">Контакты</Link>
           </nav>
 
@@ -139,137 +137,128 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
   }
 
   function ConsultationBlock() {
-  const [name, setName] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+    const [name, setName] = React.useState("");
+    const [phone, setPhone] = React.useState("");
+    const [message, setMessage] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
 
-  const sendLead = async () => {
-    try {
-      setLoading(true);
+    const sendLead = async () => {
+      try {
+        setLoading(true);
 
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          message,
-          page: window.location.pathname,
-        }),
-      });
+        const response = await fetch("/api/lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            phone,
+            message,
+            page: window.location.pathname,
+          }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.ok) {
-        alert("Заявка успешно отправлена!");
-        setName("");
-        setPhone("");
-        setMessage("");
-      } else {
-        alert("Ошибка отправки заявки");
+        if (data.ok) {
+          alert("Заявка успешно отправлена!");
+          setName("");
+          setPhone("");
+          setMessage("");
+        } else {
+          alert("Ошибка отправки заявки");
+        }
+      } catch (error) {
+        alert("Ошибка соединения");
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      alert("Ошибка соединения");
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  return (
-    <section className="consultation" id="consultation">
-      <div className="consultationLeft">
-        <span>Бесплатная консультация</span>
+    return (
+      <section className="consultation" id="consultation">
+        <div className="consultationLeft">
+          <span>Бесплатная консультация</span>
+          <h2>Узнайте, можно ли списать ваши долги законно</h2>
+          <p>
+            Оставьте заявку и получите предварительную консультацию от Дмитрия
+            Морозова. Разберём вашу ситуацию и предложим варианты решения.
+          </p>
 
-        <h2>Узнайте, можно ли списать ваши долги законно</h2>
-
-        <p>
-          Оставьте заявку и получите предварительную консультацию от Дмитрия
-          Морозова. Разберём вашу ситуацию и предложим варианты решения.
-        </p>
-
-        <div className="consultationBenefits">
-          <div>✓ Бесплатный анализ ситуации</div>
-          <div>✓ Защита от коллекторов</div>
-          <div>✓ Работа по 127-ФЗ</div>
-          <div>✓ Полное сопровождение</div>
-        </div>
-      </div>
-
-      <div className="consultationForm">
-        <input
-          type="text"
-          placeholder="Ваше имя"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <input
-          type="tel"
-          placeholder="Ваш телефон"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-
-        <textarea
-          placeholder="Опишите ситуацию"
-          rows="5"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-
-        <button
-          onClick={sendLead}
-          className="consultationBtn"
-          disabled={loading}
-        >
-          {loading ? "Отправка..." : "Отправить заявку"}
-        </button>
-      </div>
-    </section>
-  );
-}
-function OfficeBlock() {
-  return (
-    <section className="officeSection">
-      <div className="officeText">
-        <span>Мы рядом с вами</span>
-        <h2>Наш офис в Волгограде</h2>
-        <p>
-          Принимаем клиентов в офисе юридического центра Дмитрия Морозова.
-          Здесь можно получить консультацию, обсудить документы и выбрать
-          безопасный путь решения долговой ситуации.
-        </p>
-
-        <div className="officeInfo">
-          <div>📍 Волгоград, 2-я Динамовская, 10</div>
-          <div>🕘 Пн–Пт: 09:00–18:00</div>
+          <div className="consultationBenefits">
+            <div>✓ Бесплатный анализ ситуации</div>
+            <div>✓ Защита от коллекторов</div>
+            <div>✓ Работа по 127-ФЗ</div>
+            <div>✓ Полное сопровождение</div>
+          </div>
         </div>
 
-        <div className="officeActions">
-          <a
-            href="https://2gis.ru/volgograd/geo/4644972770889582"
-            target="_blank"
-            rel="noreferrer"
-            className="officeBtn"
-          >
-            Построить маршрут в 2ГИС
-          </a>
+        <div className="consultationForm">
+          <input
+            type="text"
+            placeholder="Ваше имя"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-          <a href={phoneHref} className="officeGhostBtn">
-            Позвонить
-          </a>
+          <input
+            type="tel"
+            placeholder="Ваш телефон"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+
+          <textarea
+            placeholder="Опишите ситуацию"
+            rows="5"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+
+          <button onClick={sendLead} className="consultationBtn" disabled={loading}>
+            {loading ? "Отправка..." : "Отправить заявку"}
+          </button>
         </div>
-      </div>
+      </section>
+    );
+  }
 
-      <div className="officePhoto">
-        <img src="/office.jpg" alt="Офис юридического центра Дмитрия Морозова" />
-      </div>
-    </section>
-  );
-}
+  function OfficeBlock() {
+    return (
+      <section className="officeSection">
+        <div className="officeText">
+          <span>Мы рядом с вами</span>
+          <h2>Наш офис в Волгограде</h2>
+          <p>
+            Принимаем клиентов в офисе юридического центра Дмитрия Морозова.
+            Здесь можно получить консультацию, обсудить документы и выбрать
+            безопасный путь решения долговой ситуации.
+          </p>
+
+          <div className="officeInfo">
+            <div>📍 Волгоград, 2-я Динамовская, 10</div>
+            <div>🕘 Пн–Пт: 09:00–18:00</div>
+          </div>
+
+          <div className="officeActions">
+            <a href={twoGisLink} target="_blank" rel="noreferrer" className="officeBtn">
+              Построить маршрут в 2ГИС
+            </a>
+
+            <a href={phoneHref} className="officeGhostBtn">
+              Позвонить
+            </a>
+          </div>
+        </div>
+
+        <div className="officePhoto">
+          <img src="/office.jpg" alt="Офис юридического центра Дмитрия Морозова" />
+        </div>
+      </section>
+    );
+  }
+
   function HomePage() {
     return (
       <main>
@@ -327,27 +316,29 @@ function OfficeBlock() {
             </div>
           </div>
         </section>
-<section className="numbersSection">
-  <div>
-    <strong>10+ лет</strong>
-    <span>юридической практики</span>
-  </div>
 
-  <div>
-    <strong>500+ дел</strong>
-    <span>по долговым вопросам</span>
-  </div>
+        <section className="numbersSection">
+          <div>
+            <strong>10+ лет</strong>
+            <span>юридической практики</span>
+          </div>
 
-  <div>
-    <strong>100 млн ₽</strong>
-    <span>списанных долгов</span>
-  </div>
+          <div>
+            <strong>500+ дел</strong>
+            <span>по долговым вопросам</span>
+          </div>
 
-  <div>
-    <strong>98%</strong>
-    <span>клиентов приходят по рекомендации</span>
-  </div>
-</section>
+          <div>
+            <strong>100 млн ₽</strong>
+            <span>списанных долгов</span>
+          </div>
+
+          <div>
+            <strong>98%</strong>
+            <span>клиентов приходят по рекомендации</span>
+          </div>
+        </section>
+
         <section className="steps">
           <div className="sectionHead">
             <span>Как проходит работа</span>
@@ -412,8 +403,8 @@ function OfficeBlock() {
           </div>
         </section>
 
-       <OfficeBlock />
-<ConsultationBlock />
+        <OfficeBlock />
+        <ConsultationBlock />
       </main>
     );
   }
@@ -476,58 +467,60 @@ function OfficeBlock() {
       </main>
     );
   }
-function FaqPage() {
-  const questions = [
-    {
-      q: "Сколько длится процедура банкротства?",
-      a: "В среднем процедура занимает от 6 до 10 месяцев. Точный срок зависит от суда, состава долгов, имущества и особенностей конкретной ситуации.",
-    },
-    {
-      q: "Можно ли списать микрозаймы?",
-      a: "Да, микрозаймы, кредиты, кредитные карты и многие другие долговые обязательства могут быть списаны через законную процедуру банкротства.",
-    },
-    {
-      q: "Что будет с зарплатой?",
-      a: "Во время процедуры вопрос доходов рассматривается индивидуально. Часть средств может сохраняться на необходимые расходы, но детали нужно разбирать по вашей ситуации.",
-    },
-    {
-      q: "Можно ли сохранить единственное жильё?",
-      a: "В большинстве случаев единственное жильё защищено законом, если оно не находится в ипотеке. Но каждый случай нужно проверять отдельно.",
-    },
-    {
-      q: "Коллекторы перестанут звонить?",
-      a: "После начала юридической работы можно выстроить защиту от давления кредиторов и коллекторов. Незаконные звонки, угрозы и давление можно обжаловать.",
-    },
-    {
-      q: "Нужно ли самому ходить в суд?",
-      a: "Обычно юрист сопровождает клиента и берёт на себя основную юридическую работу. Формат участия зависит от конкретного дела.",
-    },
-  ];
 
-  return (
-    <main>
-      <section className="pageHero">
-        <span>Ответы на частые вопросы</span>
-        <h1>Частые вопросы о банкротстве и списании долгов</h1>
-        <p>
-          Собрали основные вопросы, которые чаще всего задают клиенты перед
-          консультацией.
-        </p>
-      </section>
+  function FaqPage() {
+    const questions = [
+      {
+        q: "Сколько длится процедура банкротства?",
+        a: "В среднем процедура занимает от 6 до 10 месяцев. Точный срок зависит от суда, состава долгов, имущества и особенностей конкретной ситуации.",
+      },
+      {
+        q: "Можно ли списать микрозаймы?",
+        a: "Да, микрозаймы, кредиты, кредитные карты и многие другие долговые обязательства могут быть списаны через законную процедуру банкротства.",
+      },
+      {
+        q: "Что будет с зарплатой?",
+        a: "Во время процедуры вопрос доходов рассматривается индивидуально. Часть средств может сохраняться на необходимые расходы, но детали нужно разбирать по вашей ситуации.",
+      },
+      {
+        q: "Можно ли сохранить единственное жильё?",
+        a: "В большинстве случаев единственное жильё защищено законом, если оно не находится в ипотеке. Но каждый случай нужно проверять отдельно.",
+      },
+      {
+        q: "Коллекторы перестанут звонить?",
+        a: "После начала юридической работы можно выстроить защиту от давления кредиторов и коллекторов. Незаконные звонки, угрозы и давление можно обжаловать.",
+      },
+      {
+        q: "Нужно ли самому ходить в суд?",
+        a: "Обычно юрист сопровождает клиента и берёт на себя основную юридическую работу. Формат участия зависит от конкретного дела.",
+      },
+    ];
 
-      <section className="faqSection">
-        {questions.map((item, index) => (
-          <details className="faqItem" key={index}>
-            <summary>{item.q}</summary>
-            <p>{item.a}</p>
-          </details>
-        ))}
-      </section>
+    return (
+      <main>
+        <section className="pageHero">
+          <span>Ответы на частые вопросы</span>
+          <h1>Частые вопросы о банкротстве и списании долгов</h1>
+          <p>
+            Собрали основные вопросы, которые чаще всего задают клиенты перед
+            консультацией.
+          </p>
+        </section>
 
-      <ConsultationBlock />
-    </main>
-  );
-}
+        <section className="faqSection">
+          {questions.map((item, index) => (
+            <details className="faqItem" key={index}>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <ConsultationBlock />
+      </main>
+    );
+  }
+
   function ContactsPage() {
     return (
       <main>
@@ -557,18 +550,16 @@ function FaqPage() {
               @morozov_dmitry_urist
             </a>
           </div>
+
+          <div>
+            <h3>2ГИС</h3>
+            <p>Построить маршрут до офиса</p>
+            <a href={twoGisLink} target="_blank" rel="noreferrer">
+              Открыть в 2ГИС
+            </a>
+          </div>
         </section>
-<div>
-  <h3>2ГИС</h3>
-  <p>Построить маршрут до офиса</p>
-  <a
-    href="https://2gis.ru/volgograd/geo/4644972770889582"
-    target="_blank"
-    rel="noreferrer"
-  >
-    Открыть в 2ГИС
-  </a>
-</div>
+
         <ConsultationBlock />
       </main>
     );
@@ -577,11 +568,11 @@ function FaqPage() {
   return (
     <div className="app">
       <Header />
-<a href="#consultation" className="mobileFixedConsultation">
 
-  Бесплатная консультация
+      <a href="#consultation" className="mobileFixedConsultation">
+        Бесплатная консультация
+      </a>
 
-</a>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
@@ -659,8 +650,9 @@ function FaqPage() {
             />
           }
         />
-<Route path="/faq" element={<FaqPage />} />
+
         <Route path="/cases" element={<CasesPage />} />
+        <Route path="/faq" element={<FaqPage />} />
         <Route path="/contacts" element={<ContactsPage />} />
       </Routes>
     </div>
