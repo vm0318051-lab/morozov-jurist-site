@@ -521,50 +521,53 @@ function App() {
     );
   }
 
-  function ContactsPage() {
-    return (
-      <main>
-        <section className="pageHero">
-          <span>Контакты</span>
-          <h1>Связаться с Дмитрием Морозовым</h1>
-          <p>
-            Напишите в Telegram, позвоните или оставьте заявку на бесплатную
-            консультацию.
-          </p>
-        </section>
+ function ContactsPage() {
+  return (
+    <main>
+      <section className="pageHero">
+        <span>Контакты</span>
+        <h1>Связаться с Дмитрием Морозовым</h1>
+        <p>
+          Напишите в Telegram, позвоните или оставьте заявку на бесплатную
+          консультацию.
+        </p>
+      </section>
 
-        <section className="contactsBlock">
-          <div>
-            <h3>Адрес</h3>
-            <p>Волгоград, 2-я Динамовская, 10</p>
-          </div>
+      <section className="contactsBlock">
+        <div>
+          <h3>Адрес</h3>
+          <p>Волгоград, 2-я Динамовская, 10</p>
+        </div>
 
-          <div>
-            <h3>Телефон</h3>
-            <p>{phoneText}</p>
-          </div>
+        <div>
+          <h3>Телефон</h3>
+          <p>{phoneText}</p>
+        </div>
 
-          <div>
-            <h3>Telegram</h3>
-            <a href={telegramLink} target="_blank" rel="noreferrer">
-              @morozov_dmitry_urist
-            </a>
-          </div>
+        <div>
+          <h3>Telegram</h3>
+          <a href={telegramLink} target="_blank" rel="noreferrer">
+            @morozov_dmitry_urist
+          </a>
+        </div>
 
-          <div>
-            <h3>2ГИС</h3>
-            <p>Построить маршрут до офиса</p>
-            <a href={twoGisLink} target="_blank" rel="noreferrer">
-              Открыть в 2ГИС
-            </a>
-          </div>
-        </section>
+        <div>
+          <h3>2ГИС</h3>
+          <p>Построить маршрут до офиса</p>
+          <a
+            href={twoGisLink}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Открыть в 2ГИС
+          </a>
+        </div>
+      </section>
 
-        <ConsultationBlock />
-      </main>
-    );
-  }
-
+      <ConsultationBlock />
+    </main>
+  );
+}
   return (
     <div className="app">
       <Header />
