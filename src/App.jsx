@@ -178,7 +178,7 @@ const telegramLink = "https://t.me/morozov_dmitry_urist";
   };
 
   return (
-    <section className="consultation">
+    <section className="consultation" id="consultation">
       <div className="consultationLeft">
         <span>Бесплатная консультация</span>
 
@@ -495,7 +495,11 @@ function OfficeBlock() {
   return (
     <div className="app">
       <Header />
+<a href="#consultation" className="mobileFixedConsultation">
 
+  Бесплатная консультация
+
+</a>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
