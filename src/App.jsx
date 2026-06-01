@@ -558,7 +558,17 @@ function FaqPage() {
             </a>
           </div>
         </section>
-
+<div>
+  <h3>2ГИС</h3>
+  <p>Построить маршрут до офиса</p>
+  <a
+    href="https://2gis.ru/volgograd/geo/4644972770889582"
+    target="_blank"
+    rel="noreferrer"
+  >
+    Открыть в 2ГИС
+  </a>
+</div>
         <ConsultationBlock />
       </main>
     );
